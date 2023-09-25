@@ -1,7 +1,7 @@
 let colorProducto
 let tipoDeProducto
 let nombreUsuario
-let shippingCost = 0 // Initialize shipping cost to zero.
+let shippingCost = 0 // Inicializa el costo de envío en cero.
 
 nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
 
@@ -41,7 +41,7 @@ while (true) {
   }
 }
 
-const productWeight = 2
+const productWeights = [0.5, 0.8, 1.2] // Pesos de los productos (en kilogramos).
 
 const destination = prompt("Ingresa tu código postal:")
 
@@ -50,6 +50,24 @@ const shippingMethod = prompt(
 )
 
 if (destination && shippingMethod) {
+  let productValue
+
+  switch (tipoDeProducto) {
+    case 1:
+      productValue = 20 // Valor de los aretes en dólares.
+      break
+    case 2:
+      productValue = 30 // Valor de los anillos en dólares.
+      break
+    case 3:
+      productValue = 40 // Valor de las pulseras en dólares.
+      break
+    default:
+      productValue = 0
+  }
+
+  const productWeight = productWeights[tipoDeProducto - 1]
+
   switch (shippingMethod) {
     case "1":
       if (productWeight < 1) {
@@ -73,7 +91,11 @@ if (destination && shippingMethod) {
       alert("Método de envío no válido.")
   }
 
+  const totalCost = productValue + shippingCost
+
+  alert(`El costo de los productos es: $${productValue}`)
   alert(`El costo de envío es: $${shippingCost}`)
+  alert(`El costo total es: $${totalCost}`)
 } else {
   alert("Por favor, ingresa tu código postal y selecciona un método de envío.")
 }
