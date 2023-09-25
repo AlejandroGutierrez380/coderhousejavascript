@@ -1,3 +1,5 @@
+/*EL CODIGO ES SOBRE LA TIENDA MERAQUI DE ACCESORIOS*/
+
 let colorProducto
 let tipoDeProducto
 let nombreUsuario
