@@ -7,41 +7,55 @@ let shippingCost = 0 // Inicializa el costo de envío en cero.
 
 nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
 
-while (true) {
-  colorProducto = parseInt(
-    prompt(
-      "Ingrese el color del producto que desea:\n1-Negro\n2-Plateado\n3-Dorado"
+function obtenerColorProducto() {
+  while (true) {
+    const colorProducto = parseInt(
+      prompt(
+        "Ingrese el color del producto que desea:\n1-Negro\n2-Plateado\n3-Dorado"
+      )
     )
-  )
-  switch (colorProducto) {
-    case 1:
-    case 2:
-    case 3:
-      break
-    default:
-      alert("No has introducido un valor válido.")
-  }
-  if (colorProducto >= 1 && colorProducto <= 3) {
-    break
+
+    switch (colorProducto) {
+      case 1:
+      case 2:
+      case 3:
+        return colorProducto // Retorna el valor válido
+      default:
+        alert("No has introducido un valor válido.")
+    }
   }
 }
 
-while (true) {
-  tipoDeProducto = parseInt(
-    prompt("Ingrese el producto que desea:\n1-Aretes\n2-Anillos\n3-Pulseras")
-  )
-  switch (tipoDeProducto) {
-    case 1:
-    case 2:
-    case 3:
-      break
-    default:
-      alert("No has introducido un valor válido.")
-  }
-  if (tipoDeProducto >= 1 && tipoDeProducto <= 3) {
-    break
+// Llama a la función para obtener el color del producto
+const colorElegido = obtenerColorProducto()
+
+// Ahora puedes utilizar 'colorElegido' en tu código principal
+console.log("El color elegido es:", colorElegido)
+
+// Función para obtener el tipo de producto
+function obtenerTipoDeProducto() {
+  while (true) {
+    const tipoDeProducto = parseInt(
+      prompt("Ingrese el producto que desea:\n1-Aretes\n2-Anillos\n3-Pulseras")
+    )
+
+    switch (tipoDeProducto) {
+      case 1:
+      case 2:
+      case 3:
+        return tipoDeProducto // Retorna el valor válido
+      default:
+        alert
+        alert("No has introducido un valor válido.")
+    }
   }
 }
+
+// Llamamos a la función para obtener el tipo de producto
+const tipoElegido = obtenerTipoDeProducto()
+
+// Luego puedes utilizar 'tipoElegido' en tu código principal
+console.log("El tipo de producto elegido es:", tipoElegido)
 
 const productWeights = [0.5, 0.8, 1.2] // Pesos de los productos (en kilogramos).
 
@@ -65,7 +79,7 @@ if (destination && shippingMethod) {
       productValue = 40 // Valor de las pulseras en dólares.
       break
     default:
-      productValue = 0
+      productValue = 30
   }
 
   const productWeight = productWeights[tipoDeProducto - 1]
