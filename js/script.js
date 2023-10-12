@@ -5,8 +5,8 @@ let tipoDeProducto
 
 let shippingCost = 0 // Inicializa el costo de envío en cero.
 
-var nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
-var edadUsuario = prompt("Por favor, ingresa tu edad")
+let nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
+let edadUsuario = prompt("Por favor, ingresa tu edad")
 
 alert(
   "¡Hola, " + nombreUsuario + "! Tienes " + edadUsuario + " años. Bienvenido."
@@ -65,9 +65,9 @@ console.log("El color elegido es:", colorElegido)
 
 // Función para obtener el tipo de producto
 function obtenerTipoDeProducto() {
-  var productosElegidos = [] // Array para almacenar los productos
-  var costoEnvio = 10
-  var totalAccesorios = 0 // Variable para rastrear el número total de accesorios seleccionados
+  let productosElegidos = [] // Array para almacenar los productos
+  let costoEnvio = 10
+  let totalAccesorios = 0 // Variable para rastrear el número total de accesorios seleccionados
 
   while (true) {
     const tipoDeProducto = parseInt(
@@ -131,7 +131,7 @@ function obtenerTipoDeProducto() {
   }
 
   // Calcular la suma total de los productos
-  var sumaTotal = productosElegidos.reduce(function (acumulador, producto) {
+  let sumaTotal = productosElegidos.reduce(function (acumulador, producto) {
     return acumulador + producto.costoTotal
   }, 0)
 
