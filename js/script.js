@@ -8,9 +8,10 @@ let shippingCost = 0 // Inicializa el costo de envío en cero.
 let nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
 let edadUsuario = prompt("Por favor, ingresa tu edad")
 
-alert(
-  "¡Hola, " + nombreUsuario + "! Tienes " + edadUsuario + " años. Bienvenido."
-)
+nombreUsuario = nombreUsuario || "Usuario desconocido"
+edadUsuario = isNaN(edadUsuario) ? "Edad desconocida" : edadUsuario
+
+alert(`¡Hola, ${nombreUsuario}! Tienes ${edadUsuario} años. Bienvenido.`)
 
 function obtenerColorProducto() {
   while (true) {
@@ -48,16 +49,26 @@ function obtenerColorProducto() {
         break
       default:
         alert("No has introducido un valor válido.")
-        break
+        continue // Volver al principio del bucle
     }
 
-    // Redondear el precio a dos decimales
-    productoElegido.precio = Math.round(productoElegido.precio * 100) / 100
+    if (productoElegido.nombre) {
+      productoElegido.precio = Math.round(productoElegido.precio * 100) / 100
 
-    return productoElegido
+      // Almacenar el producto elegido en localStorage como JSON
+      localStorage.setItem("productoElegido", JSON.stringify(productoElegido))
+
+      return productoElegido
+    }
   }
 }
 
+// Para recuperar el producto almacenado en localStorage como JSON:
+const productoAlmacenado = JSON.parse(localStorage.getItem("productoElegido"))
+
+if (productoAlmacenado) {
+  console.log("Producto almacenado en localStorage:", productoAlmacenado)
+}
 // Llama a la función para obtener el color del producto
 const colorElegido = obtenerColorProducto()
 
@@ -65,6 +76,16 @@ console.log("El color elegido es:", colorElegido)
 
 // Función para obtener el tipo de producto
 function obtenerTipoDeProducto() {
+  const select = document.getElementById("tipoDeProducto")
+  const h1 = document.getElementById("productoElegido")
+
+  select.addEventListener("change", function () {
+    // Obtener el nuevo tipo de producto seleccionado
+    const tipoDeProducto = select.value
+
+    // Cambiar el texto del elemento `<h1>`
+    h1.textContent = `Producto seleccionado: ${tipoDeProducto}`
+  })
   let productosElegidos = [] // Array para almacenar los productos
   let costoEnvio = 10
   let totalAccesorios = 0 // Variable para rastrear el número total de accesorios seleccionados
@@ -163,43 +184,43 @@ const shippingMethod = prompt(
 if (destination && shippingMethod) {
   let productValue
 
-  switch (tipoDeProducto) {
-    case 1:
-      productValue = 20 // Valor de los aretes en dólares.
-      break
-    case 2:
-      productValue = 30 // Valor de los anillos en dólares.
-      break
-    case 3:
-      productValue = 40 // Valor de las pulseras en dólares.
-      break
-    default:
-      productValue = 30
+  const valoresProductos = {
+    1: 20, // Valor de los aretes en dólares.
+    2: 30, // Valor de los anillos en dólares.
+    3: 40, // Valor de las pulseras en dólares.
   }
+
+  productValue = valoresProductos[tipoDeProducto] || 30
 
   const productWeight = productWeights[tipoDeProducto - 1]
 
-  switch (shippingMethod) {
-    case "1":
-      if (productWeight < 1) {
-        shippingCost = 5
-      } else if (productWeight >= 1 && productWeight <= 5) {
-        shippingCost = 10
-      } else {
-        shippingCost = 15
-      }
-      break
-    case "2":
-      if (productWeight < 1) {
-        shippingCost = 15
-      } else if (productWeight >= 1 && productWeight <= 5) {
-        shippingCost = 20
-      } else {
-        shippingCost = 25
-      }
-      break
-    default:
-      alert("Método de envío no válido.")
+  // Definir un objeto con los costos de envío
+  const costosDeEnvio = {
+    1: {
+      "<1": 5,
+      "1-5": 10,
+      ">5": 15,
+    },
+    2: {
+      "<1": 15,
+      "1-5": 20,
+      ">5": 25,
+    },
+  }
+
+  const costoMetodo = costosDeEnvio[shippingMethod]
+  let shippingCost
+
+  if (costoMetodo) {
+    shippingCost =
+      productWeight < 1
+        ? costoMetodo["<1"]
+        : productWeight >= 1 && productWeight <= 5
+        ? costoMetodo["1-5"]
+        : costoMetodo[">5"]
+    alert(`El costo de envío es: $${shippingCost}`)
+  } else {
+    alert("Método de envío no válido.")
   }
 
   const totalCost = productValue + shippingCost
