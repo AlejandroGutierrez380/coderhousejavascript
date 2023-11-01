@@ -6,15 +6,75 @@
     <title>Alejandro Gutierrez</title>
     <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body>
-    <select id="tipoDeProducto">
-      <option value="1">Aretes</option>
-      <option value="2">Anillos</option>
-      <option value="3">Pulseras</option>
-    </select>
+    <form
+      action="index.html"
+      method="post"
+      onsubmit="return validarFormulario()"
+    >
+      <input
+        type="text"
+        name="nombreUsuario"
+        id="nombreUsuario"
+        placeholder="Nombre"
+      />
+      <input
+        type="number"
+        name="edadUsuario"
+        id="edadUsuario"
+        placeholder="Edad"
+      />
+      <button type="submit">Enviar</button>
+    </form>
 
-    <h1 id="productoElegido"></h1>
+    <script>
+      function validarFormulario() {
+        const nombreUsuario = document.querySelector("#nombreUsuario").value
+        const edadUsuario = document.querySelector("#edadUsuario").value
+
+        if (!nombreUsuario || !edadUsuario) {
+          alert("Por favor, ingresa tu nombre y edad.")
+          return false
+        }
+
+        edadUsuario = isNaN(edadUsuario) ? "Edad desconocida" : edadUsuario
+
+        alert(
+          `¡Hola, ${nombreUsuario}! Tienes ${edadUsuario} años. Bienvenido.`
+        )
+
+        return true
+      }
+    </script>
+
+    <form
+      action="index.html"
+      method="post"
+      onsubmit="return validarFormulario()"
+    >
+      <select name="colorProducto" id="colorInput">
+        <option value="1">Negro</option>
+        <option value="2">Plateado</option>
+        <option value="3">Dorado</option>
+      </select>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+      function validarFormulario() {
+        const colorInput = document.querySelector("#colorInput").value
+
+        const colorProducto = parseInt(colorInput)
+        if (colorProducto < 1 || colorProducto > 3) {
+          alert("No has introducido un valor válido.")
+          return false
+        }
+
+        return true
+      }
+    </script>
   </body>
 </html>

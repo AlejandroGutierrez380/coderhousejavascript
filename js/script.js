@@ -5,62 +5,63 @@ let tipoDeProducto
 
 let shippingCost = 0 // Inicializa el costo de envío en cero.
 
-let nombreUsuario = prompt("¡Hola! Ingresa tu nombre")
-let edadUsuario = prompt("Por favor, ingresa tu edad")
+const nombreUsuario = document.querySelector("#nombreUsuario").value
+const edadUsuario = document.querySelector("#edadUsuario").value
 
-nombreUsuario = nombreUsuario || "Usuario desconocido"
+// Valida los datos del formulario
+if (!nombreUsuario || !edadUsuario) {
+  alert("Por favor, ingresa tu nombre y edad.")
+  return
+}
+
+// Si la edad del usuario no es un número, asigna el valor "Edad desconocida"
 edadUsuario = isNaN(edadUsuario) ? "Edad desconocida" : edadUsuario
 
+// Muestra un mensaje de bienvenida al usuario
 alert(`¡Hola, ${nombreUsuario}! Tienes ${edadUsuario} años. Bienvenido.`)
 
-function obtenerColorProducto() {
-  while (true) {
-    const colorInput = prompt(
-      "Ingrese el color del producto que desea:\n1-Negro\n2-Plateado\n3-Dorado"
-    )
+const colorInput = document.querySelector("#colorInput").value
 
-    const colorProducto = parseInt(colorInput)
-    let productoElegido = {}
+const colorProducto = parseInt(colorInput)
+let productoElegido = {}
 
-    switch (colorProducto) {
-      case 1:
-        productoElegido = {
-          nombre: "Negro",
-          precio: 100.567, // Precio con decimales
-          modelo: "Modelo Negro",
-          caracteristicas: ["Cromado", "Carbón"],
-        }
-        break
-      case 2:
-        productoElegido = {
-          nombre: "Plateado",
-          precio: 120.789, // Precio con decimales
-          modelo: "Modelo Plateado",
-          caracteristicas: ["Cromado", "Plata"],
-        }
-        break
-      case 3:
-        productoElegido = {
-          nombre: "Dorado",
-          precio: 130.345, // Precio con decimales
-          modelo: "Modelo Dorado",
-          caracteristicas: ["Cromado", "Oro"],
-        }
-        break
-      default:
-        alert("No has introducido un valor válido.")
-        continue // Volver al principio del bucle
+switch (colorProducto) {
+  case 1:
+    productoElegido = {
+      nombre: "Negro",
+      precio: 100.567, // Precio con decimales
+      modelo: "Modelo Negro",
+      caracteristicas: ["Cromado", "Carbón"],
     }
-
-    if (productoElegido.nombre) {
-      productoElegido.precio = Math.round(productoElegido.precio * 100) / 100
-
-      // Almacenar el producto elegido en localStorage como JSON
-      localStorage.setItem("productoElegido", JSON.stringify(productoElegido))
-
-      return productoElegido
+    break
+  case 2:
+    productoElegido = {
+      nombre: "Plateado",
+      precio: 120.789, // Precio con decimales
+      modelo: "Modelo Plateado",
+      caracteristicas: ["Cromado", "Plata"],
     }
-  }
+    break
+  case 3:
+    productoElegido = {
+      nombre: "Dorado",
+      precio: 130.345, // Precio con decimales
+      modelo: "Modelo Dorado",
+      caracteristicas: ["Cromado", "Oro"],
+    }
+    break
+  default:
+    alert("No has introducido un valor válido.")
+    return
+}
+
+if (productoElegido.nombre) {
+  productoElegido.precio = Math.round(productoElegido.precio * 100) / 100
+
+  // Almacenar el producto elegido en localStorage como JSON
+  localStorage.setItem("productoElegido", JSON.stringify(productoElegido))
+
+  return productoElegido
 }
 
 // Para recuperar el producto almacenado en localStorage como JSON:
@@ -76,16 +77,6 @@ console.log("El color elegido es:", colorElegido)
 
 // Función para obtener el tipo de producto
 function obtenerTipoDeProducto() {
-  const select = document.getElementById("tipoDeProducto")
-  const h1 = document.getElementById("productoElegido")
-
-  select.addEventListener("change", function () {
-    // Obtener el nuevo tipo de producto seleccionado
-    const tipoDeProducto = select.value
-
-    // Cambiar el texto del elemento `<h1>`
-    h1.textContent = `Producto seleccionado: ${tipoDeProducto}`
-  })
   let productosElegidos = [] // Array para almacenar los productos
   let costoEnvio = 10
   let totalAccesorios = 0 // Variable para rastrear el número total de accesorios seleccionados
