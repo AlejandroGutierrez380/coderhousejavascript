@@ -232,10 +232,10 @@
 //   alert("Por favor, ingresa tu código postal y selecciona un método de envío.")
 // }
 function realizarCompra() {
-  var nombre = document.getElementById("nombre").value
-  var edad = document.getElementById("edad").value
-  var producto = document.getElementById("producto").value
-  var color = document.getElementById("color").value
+  const nombre = document.getElementById("nombre").value
+  const edad = document.getElementById("edad").value
+  const producto = document.getElementById("producto").value
+  const color = document.getElementById("color").value
 
   // Verificar que se hayan completado todos los campos
   if (nombre === "" || edad === "" || color === "") {
