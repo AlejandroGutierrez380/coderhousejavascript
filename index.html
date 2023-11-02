@@ -10,71 +10,26 @@
   </head>
 
   <body>
-    <form
-      action="index.html"
-      method="post"
-      onsubmit="return validarFormulario()"
-    >
-      <input
-        type="text"
-        name="nombreUsuario"
-        id="nombreUsuario"
-        placeholder="Nombre"
-      />
-      <input
-        type="number"
-        name="edadUsuario"
-        id="edadUsuario"
-        placeholder="Edad"
-      />
-      <button type="submit">Enviar</button>
+    <h1>¡Bienvenido a nuestra tienda de accesorios!</h1>
+
+    <form id="formularioCompra">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required /><br /><br />
+
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" required /><br /><br />
+
+      <label for="producto">Producto deseado:</label>
+      <select id="producto">
+        <option value="Pulsera">Pulsera</option>
+        <option value="Collar">Collar</option>
+        <option value="Anillo">Anillo</option></select
+      ><br /><br />
+
+      <label for="color">Color del producto:</label>
+      <input type="text" id="color" required /><br /><br />
+
+      <button type="button" onclick="realizarCompra()">Realizar Compra</button>
     </form>
-
-    <script>
-      function validarFormulario() {
-        const nombreUsuario = document.querySelector("#nombreUsuario").value
-        const edadUsuario = document.querySelector("#edadUsuario").value
-
-        if (!nombreUsuario || !edadUsuario) {
-          alert("Por favor, ingresa tu nombre y edad.")
-          return false
-        }
-
-        edadUsuario = isNaN(edadUsuario) ? "Edad desconocida" : edadUsuario
-
-        alert(
-          `¡Hola, ${nombreUsuario}! Tienes ${edadUsuario} años. Bienvenido.`
-        )
-
-        return true
-      }
-    </script>
-
-    <form
-      action="index.html"
-      method="post"
-      onsubmit="return validarFormulario()"
-    >
-      <select name="colorProducto" id="colorInput">
-        <option value="1">Negro</option>
-        <option value="2">Plateado</option>
-        <option value="3">Dorado</option>
-      </select>
-      <button type="submit">Enviar</button>
-    </form>
-
-    <script>
-      function validarFormulario() {
-        const colorInput = document.querySelector("#colorInput").value
-
-        const colorProducto = parseInt(colorInput)
-        if (colorProducto < 1 || colorProducto > 3) {
-          alert("No has introducido un valor válido.")
-          return false
-        }
-
-        return true
-      }
-    </script>
   </body>
 </html>
