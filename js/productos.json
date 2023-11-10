@@ -1,0 +1,25 @@
+{
+    "productos": [
+      {
+        "cantidad": 2,
+        "color": "Rojo",
+        "tipo": "Pulsera",
+        "envio": "Estándar",
+        "precioTotal": 40
+      },
+      {
+        "cantidad": 1,
+        "color": "Plata",
+        "tipo": "Anillo",
+        "envio": "Rápido",
+        "precioTotal": 15
+      },
+      {
+        "cantidad": 3,
+        "color": "Dorado",
+        "tipo": "Cadena",
+        "envio": "Estándar",
+        "precioTotal": 75
+      }
+    ]
+  }

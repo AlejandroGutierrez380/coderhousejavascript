@@ -10,26 +10,41 @@
   </head>
 
   <body>
-    <h1>¡Bienvenido a nuestra tienda de accesorios!</h1>
-
-    <form id="formularioCompra">
+    <div>
+      <h1>Bienvenido al Carrito de Compras</h1>
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" required /><br /><br />
-
+      <input type="text" id="nombre" placeholder="Ingresa tu nombre" />
       <label for="edad">Edad:</label>
-      <input type="number" id="edad" required /><br /><br />
-
-      <label for="producto">Producto deseado:</label>
+      <input type="number" id="edad" placeholder="Ingresa tu edad" />
+      <button onclick="iniciarCarrito()">Iniciar Carrito</button>
+    </div>
+    <form id="carritoForm">
+      <label for="producto">Tipo de Producto:</label>
       <select id="producto">
         <option value="Pulsera">Pulsera</option>
-        <option value="Collar">Collar</option>
-        <option value="Anillo">Anillo</option></select
-      ><br /><br />
+        <option value="Anillo">Anillo</option>
+        <option value="Cadena">Cadena</option></select
+      ><br />
 
-      <label for="color">Color del producto:</label>
-      <input type="text" id="color" required /><br /><br />
+      <label for="color">Color:</label>
+      <input type="text" id="color" /><br />
 
-      <button type="button" onclick="realizarCompra()">Realizar Compra</button>
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" value="1" min="1" /><br />
+
+      <label for="envio">Método de Envío:</label>
+      <select id="envio">
+        <option value="estandar">Envío Estándar</option>
+        <option value="express">Envío Express</option></select
+      ><br />
+
+      <button type="button" onclick="agregarAlCarrito()">
+        Agregar al Carrito
+      </button>
     </form>
+
+    <h2>Resumen del Carrito</h2>
+    <ul id="carrito"></ul>
+    <p>Total de Compra: $<span id="total">0</span></p>
   </body>
 </html>
